@@ -1,0 +1,9 @@
+# Ignore everything
+/*
+# BUT
+!.gitignore
+!.boto
+!LICENSE
+!main.tf
+!scripts
+!scripts/**
