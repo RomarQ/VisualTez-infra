@@ -4,6 +4,7 @@
 !.gitignore
 !.boto
 !LICENSE
+!README.md
 !main.tf
 !scripts
 !scripts/**
