@@ -6,5 +6,8 @@
 !LICENSE
 !README.md
 !main.tf
+!dns.tf
+!ithacanet_machine.tf
+!variables.tf
 !scripts
 !scripts/**

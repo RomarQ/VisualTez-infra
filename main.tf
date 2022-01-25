@@ -15,8 +15,8 @@ provider "google" {
   credentials = file("credentials/visualtez-dae3b0b04f33.json")
 
   project = "visualtez"
-  region  = "europe-central1"
-  zone    = "europe-central1-c"
+  region  = "europe-west1"
+  zone    = "europe-west1-b"
 }
 
 #
@@ -111,20 +111,4 @@ resource "google_compute_global_forwarding_rule" "default" {
   name       = "visualtez-forwarding-rule"
   target     = google_compute_target_https_proxy.default.id
   port_range = 443
-}
-
-resource "google_dns_record_set" "www_a" {
-  name         = "visualtez.com."
-  managed_zone = google_dns_managed_zone.visualtez_zone.name
-  type         = "A"
-  ttl          = 3600
-  rrdatas      = [google_compute_global_forwarding_rule.default.ip_address]
-}
-
-resource "google_dns_record_set" "www_cname" {
-  name          = "www.visualtez.com."
-  managed_zone  = google_dns_managed_zone.visualtez_zone.name
-  type          = "CNAME"
-  ttl           = 300
-  rrdatas       = ["visualtez.com."]
 }
