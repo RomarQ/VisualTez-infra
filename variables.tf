@@ -15,3 +15,13 @@ variable "ssh_keys" {
       }
   ]
 }
+
+variable "project" {
+  type    = string
+  default = "visualtez"
+}
+
+variable "region" {
+  type    = string
+  default = "europe-west1"
+}
