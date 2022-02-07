@@ -1,0 +1,16 @@
+[Unit]
+Description         = Tezos Baker Service
+Wants               = network-online.target
+After               = network-online.target tezos-node.service
+BindsTo             = tezos-node.service
+
+[Service]
+Environment         = TEZOS_CLIENT_DIR=/mnt/disks/d1/.tezos-client
+User                = romarq
+Group               = romarq
+WorkingDirectory    = /mnt/disks/d1
+ExecStart           = /mnt/disks/d1/tezos-binaries/tezos-baker-012-Psithaca run with local node /mnt/disks/d1/.tezos-node VisualTez
+Restart             = on-failure
+
+[Install]
+WantedBy            = multi-user.target

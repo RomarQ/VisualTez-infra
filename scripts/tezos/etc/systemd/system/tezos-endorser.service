@@ -1,0 +1,16 @@
+[Unit]
+Description         = Tezos Endorser Service
+Wants               = network-online.target
+After               = network-online.target tezos-node.service
+BindsTo             = tezos-node.service
+
+[Service]
+Environment         = TEZOS_CLIENT_DIR=/mnt/disks/d1/.tezos-client
+User                = romarq
+Group               = romarq
+WorkingDirectory    = /mnt/disks/d1
+ExecStart           = /mnt/disks/d1/tezos-binaries/tezos-endorser-011-PtHangz2 run VisualTez
+Restart             = on-failure
+
+[Install]
+WantedBy            = multi-user.target

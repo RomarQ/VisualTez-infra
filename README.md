@@ -17,9 +17,3 @@ terraform init
 # Or upgrade components with "terraform init -upgrade"
 terraform apply
 ```
-
-## Publish TezWell frontend
-
-```sh
-./scripts/publish_frontent.sh
-```
