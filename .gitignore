@@ -7,6 +7,8 @@
 !README.md
 !main.tf
 !dns.tf
+!mainnet_machine.tf
+!hangzhounet_machine.tf
 !ithacanet_machine.tf
 !variables.tf
 !scripts

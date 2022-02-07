@@ -1,13 +1,13 @@
-output "ithacanet_external_ip" {
+output "mainnet_external_ip" {
     value = google_compute_instance.ithacanet.network_interface.0.access_config.0.nat_ip
 }
 
-resource "google_compute_address" "ithacanet" {
-  name = "ithacanet-ipv4-address"
+resource "google_compute_address" "mainnet" {
+  name = "mainnet-ipv4-address"
 }
 
-resource "google_compute_instance" "ithacanet" {
-    name         = "ithacanet-vm"
+resource "google_compute_instance" "mainnet" {
+    name         = "mainnet-vm"
     machine_type = "e2-standard-2"
     zone         = "europe-west1-b"
 
@@ -22,7 +22,7 @@ resource "google_compute_instance" "ithacanet" {
         network = "default"
 
         access_config {
-            nat_ip = google_compute_address.ithacanet.address
+            nat_ip = google_compute_address.mainnet.address
         }
     }
 
@@ -37,14 +37,14 @@ resource "google_compute_instance" "ithacanet" {
     tags = ["rpc-firewall-rules"]
 }
 
-resource "google_compute_disk" "ithacanet" {
-    name  = "ithacanet-disk"
+resource "google_compute_disk" "mainnet" {
+    name  = "mainnet-disk"
     type  = "pd-ssd"
     zone  = "europe-west1-b"
     size  = 40
 }
 
-resource "google_compute_attached_disk" "ithacanet" {
-    disk     = google_compute_disk.ithacanet.id
-    instance = google_compute_instance.ithacanet.id
+resource "google_compute_attached_disk" "mainnet" {
+    disk     = google_compute_disk.mainnet.id
+    instance = google_compute_instance.mainnet.id
 }

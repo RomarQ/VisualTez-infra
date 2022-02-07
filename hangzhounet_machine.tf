@@ -1,13 +1,13 @@
-output "ithacanet_external_ip" {
-    value = google_compute_instance.ithacanet.network_interface.0.access_config.0.nat_ip
+output "hangzhounet_external_ip" {
+    value = google_compute_instance.hangzhounet.network_interface.0.access_config.0.nat_ip
 }
 
-resource "google_compute_address" "ithacanet" {
-  name = "ithacanet-ipv4-address"
+resource "google_compute_address" "hangzhounet" {
+  name = "hangzhounet-ipv4-address"
 }
 
-resource "google_compute_instance" "ithacanet" {
-    name         = "ithacanet-vm"
+resource "google_compute_instance" "hangzhounet" {
+    name         = "hangzhounet-vm"
     machine_type = "e2-standard-2"
     zone         = "europe-west1-b"
 
@@ -22,7 +22,7 @@ resource "google_compute_instance" "ithacanet" {
         network = "default"
 
         access_config {
-            nat_ip = google_compute_address.ithacanet.address
+            nat_ip = google_compute_address.hangzhounet.address
         }
     }
 
@@ -37,14 +37,14 @@ resource "google_compute_instance" "ithacanet" {
     tags = ["rpc-firewall-rules"]
 }
 
-resource "google_compute_disk" "ithacanet" {
-    name  = "ithacanet-disk"
+resource "google_compute_disk" "hangzhounet" {
+    name  = "hangzhounet-disk"
     type  = "pd-ssd"
     zone  = "europe-west1-b"
     size  = 40
 }
 
-resource "google_compute_attached_disk" "ithacanet" {
-    disk     = google_compute_disk.ithacanet.id
-    instance = google_compute_instance.ithacanet.id
+resource "google_compute_attached_disk" "hangzhounet" {
+    disk     = google_compute_disk.hangzhounet.id
+    instance = google_compute_instance.hangzhounet.id
 }
