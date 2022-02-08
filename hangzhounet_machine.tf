@@ -41,7 +41,7 @@ resource "google_compute_disk" "hangzhounet" {
     name  = "hangzhounet-disk"
     type  = "pd-ssd"
     zone  = "europe-west1-b"
-    size  = 40
+    size  = 100
 }
 
 resource "google_compute_attached_disk" "hangzhounet" {
