@@ -19,18 +19,7 @@ resource "google_dns_record_set" "storage_a" {
   managed_zone = google_dns_managed_zone.visualtez_zone.name
   type         = "A"
   ttl          = 3600
-  rrdatas      = [google_compute_instance.hangzhounet.network_interface.0.access_config.0.nat_ip]
-}
-
-
-# Hangzhounet records
-
-resource "google_dns_record_set" "hangzhounet_a" {
-  name         = "hangzhounet.visualtez.com."
-  managed_zone = google_dns_managed_zone.visualtez_zone.name
-  type         = "A"
-  ttl          = 3600
-  rrdatas      = [google_compute_instance.hangzhounet.network_interface.0.access_config.0.nat_ip]
+  rrdatas      = [google_compute_instance.ithacanet.network_interface.0.access_config.0.nat_ip]
 }
 
 # Ithaca records

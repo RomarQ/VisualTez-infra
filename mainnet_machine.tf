@@ -7,9 +7,10 @@ resource "google_compute_address" "mainnet" {
 }
 
 resource "google_compute_instance" "mainnet" {
-    name         = "mainnet-vm"
-    machine_type = "e2-standard-2"
-    zone         = "europe-west1-b"
+    name                        = "mainnet-vm"
+    zone                        = "europe-west1-b"
+    machine_type                = "custom-1-4096"
+    allow_stopping_for_update   = true
 
     boot_disk {
         initialize_params {
