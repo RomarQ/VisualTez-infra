@@ -7,7 +7,7 @@ After               = network-online.target
 User                = romarq
 Group               = romarq
 WorkingDirectory    = /mnt/disks/d1
-ExecStart           = /mnt/disks/d1/tezos-binaries/tezos-node run --rpc-addr 127.0.0.1:8732 --data-dir /mnt/disks/d1/.tezos-node --cors-origin="*" --cors-header="Content-Type" --history-mode=archive
+ExecStart           = /mnt/disks/d1/tezos-binaries/arm64/tezos-node run --rpc-addr 127.0.0.1:8732 --data-dir /mnt/disks/d1/.tezos-node --cors-origin="*" --cors-header="Content-Type" --history-mode=archive
 Restart             = on-failure
 
 [Install]

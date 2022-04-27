@@ -9,7 +9,7 @@ Environment         = TEZOS_CLIENT_DIR=/mnt/disks/d1/.tezos-client
 User                = romarq
 Group               = romarq
 WorkingDirectory    = /mnt/disks/d1
-ExecStart           = /mnt/disks/d1/tezos-binaries/tezos-baker-012-Psithaca run with local node /mnt/disks/d1/.tezos-node VisualTez
+ExecStart           = /mnt/disks/d1/tezos-binaries/arm64/tezos-baker-012-Psithaca run with local node /mnt/disks/d1/.tezos-node VisualTez
 Restart             = on-failure
 
 [Install]

@@ -3,7 +3,7 @@
 set -o pipefail
 
 SCRIPT_LOCATION=$(dirname "$0")
-BUILD_ID=2008253594
+JOB_ID=2376802447
 NETWORK=$1
 if [[ -z $NETWORK ]]
 then
@@ -17,7 +17,7 @@ cd /mnt/disks/d1
 
 # Download Tezos binaries
 apt install unzip
-wget -O tezos-binaries.zip "https://gitlab.com/tezos/tezos/-/jobs/${BUILD_ID}/artifacts/download"
+wget -O tezos-binaries.zip "https://gitlab.com/tezos/tezos/-/jobs/${JOB_ID}/artifacts/download"
 unzip tezos-binaries.zip
 rm -rf tezos-binaries.zip
 
@@ -32,8 +32,7 @@ tezos-binaries/tezos-node identity generate --data-dir /mnt/disks/d1/.tezos-node
 
 # Deploy systemd services
 cp "$SCRIPT_LOCATION/etc/systemd/system/tezos-node.service" /etc/systemd/system/tezos-node.service
-cp "$SCRIPT_LOCATION/etc/systemd/system/tezos-baker-hangzhou.service" /etc/systemd/system/tezos-baker-hangzhou.service
 cp "$SCRIPT_LOCATION/etc/systemd/system/tezos-baker-ithaca.service" /etc/systemd/system/tezos-baker-ithaca.service
-cp "$SCRIPT_LOCATION/etc/systemd/system/tezos-endorser.service" /etc/systemd/system/tezos-endorser.service
+cp "$SCRIPT_LOCATION/etc/systemd/system/tezos-baker-jakarta.service" /etc/systemd/system/tezos-baker-jakarta.service
 
 systemctl daemon-reload
