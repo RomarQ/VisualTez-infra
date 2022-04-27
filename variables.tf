@@ -25,3 +25,13 @@ variable "region" {
   type    = string
   default = "europe-west1"
 }
+
+variable "aws_region" {
+  type    = string
+  default = "eu-west-2"
+}
+
+variable "aws_region_az" {
+  type    = string
+  default = "eu-west-2a"
+}

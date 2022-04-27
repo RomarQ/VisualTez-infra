@@ -11,5 +11,7 @@
 !hangzhounet_machine.tf
 !ithacanet_machine.tf
 !variables.tf
+!jakartanet_machine.tf
+!aws.tf
 !scripts
 !scripts/**
