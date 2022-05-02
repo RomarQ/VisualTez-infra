@@ -22,6 +22,16 @@ resource "google_dns_record_set" "storage_a" {
   rrdatas      = [google_compute_instance.ithacanet.network_interface.0.access_config.0.nat_ip]
 }
 
+# Testing API
+
+resource "google_dns_record_set" "testing_api_a" {
+  name         = "testing.visualtez.com."
+  managed_zone = google_dns_managed_zone.visualtez_zone.name
+  type         = "A"
+  ttl          = 3600
+  rrdatas      = [aws_instance.jakartanet.public_ip]
+}
+
 # Jakarta records
 
 resource "google_dns_record_set" "jakartanet_a" {
