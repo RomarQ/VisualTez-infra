@@ -1,51 +1,37 @@
 output "mainnet_external_ip" {
-    value = google_compute_instance.ithacanet.network_interface.0.access_config.0.nat_ip
+    value       = aws_instance.mainnet.public_ip
+    description = "The public IP address of mainnet instance."
 }
 
-resource "google_compute_address" "mainnet" {
-  name = "mainnet-ipv4-address"
+resource "aws_instance" "mainnet" {
+    # https://cloud-images.ubuntu.com/locator/ec2
+    ami                         = "ami-01361e35a99201b48"
+
+    instance_type               = "t4g.large"
+    associate_public_ip_address = true
+    vpc_security_group_ids      = [
+        aws_security_group.tezos_traffic.id
+    ]
+
+    key_name                    = aws_key_pair.ssh.id
+
+    tags = {
+        Name = "mainnet-vm"
+    }
 }
 
-resource "google_compute_instance" "mainnet" {
-    name                        = "mainnet-vm"
-    zone                        = "europe-west1-b"
-    machine_type                = "custom-1-4096"
-    allow_stopping_for_update   = true
+resource "aws_ebs_volume" "mainnet" {
+    availability_zone = aws_instance.mainnet.availability_zone
+    type              = "gp2"
+    size              = 60
 
-    boot_disk {
-        initialize_params {
-            type = "pd-ssd"
-            image = "projects/ubuntu-os-cloud/global/images/ubuntu-2110-impish-v20220118"
-        }
+    tags = {
+        Name = "mainnet-volume"
     }
-
-    network_interface {
-        network = "default"
-
-        access_config {
-            nat_ip = google_compute_address.mainnet.address
-        }
-    }
-
-    lifecycle {
-        ignore_changes = [attached_disk]
-    }
-
-    metadata = {
-        ssh-keys = join("\n", [for key in var.ssh_keys : "${key.user}:${key.publickey}"])
-    }
-
-    tags = ["rpc-firewall-rules"]
 }
 
-resource "google_compute_disk" "mainnet" {
-    name  = "mainnet-disk"
-    type  = "pd-ssd"
-    zone  = "europe-west1-b"
-    size  = 40
-}
-
-resource "google_compute_attached_disk" "mainnet" {
-    disk     = google_compute_disk.mainnet.id
-    instance = google_compute_instance.mainnet.id
+resource "aws_volume_attachment" "mainnet" {
+    device_name = "/dev/sdf"
+    volume_id   = aws_ebs_volume.mainnet.id
+    instance_id = aws_instance.mainnet.id
 }

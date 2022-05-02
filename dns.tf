@@ -50,5 +50,5 @@ resource "google_dns_record_set" "mainnet_a" {
   managed_zone = google_dns_managed_zone.visualtez_zone.name
   type         = "A"
   ttl          = 3600
-  rrdatas      = [google_compute_instance.mainnet.network_interface.0.access_config.0.nat_ip]
+  rrdatas      = [aws_instance.mainnet.public_ip]
 }
