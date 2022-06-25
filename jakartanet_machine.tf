@@ -78,7 +78,7 @@ resource "aws_instance" "jakartanet" {
 resource "aws_ebs_volume" "jakartanet" {
     availability_zone = aws_instance.jakartanet.availability_zone
     type              = "gp2"
-    size              = 40
+    size              = 100
 
     tags = {
         Name = "jakartanet-volume"
