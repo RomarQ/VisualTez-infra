@@ -42,7 +42,7 @@ resource "google_compute_disk" "ithacanet" {
     name  = "ithacanet-disk"
     type  = "pd-ssd"
     zone  = "europe-west1-b"
-    size  = 100
+    size  = 130
 }
 
 resource "google_compute_attached_disk" "ithacanet" {
